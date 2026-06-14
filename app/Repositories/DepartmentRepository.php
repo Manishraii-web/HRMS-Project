@@ -16,7 +16,7 @@ class DepartmentRepository implements DepartmentRepositoryInterface
     {
         return $this->model->newQuery()->when($filters['search'] ?? null, function ($query, $search) {
             $query->where(function ($q) use ($search) {
-                $q->where('name', 'like', "%{$search%}"
+                $q->where('name', 'like', "%{$search}%")
                 ->orWhere('code', 'like', "%{$search}%");
             });
         })
