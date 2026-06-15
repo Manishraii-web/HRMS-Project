@@ -81,3 +81,46 @@ class DepartmentController extends Controller
      return redirect()->route('departments.index')->with('success','Data delete Sucessfull');
     }
 }
+
+
+// public function index(Request $request)   //JSON
+// {
+//     $departments = $this->department_service->list(
+//         search: $request->string('search')->toString(),
+//         perPage: 10,
+//     );
+
+//     return response()->json($departments);
+// }
+
+// public function store(StoreDepartmentRequest $request)
+// {
+//     $department = $this->department_service->create(
+//         DepartmentData::fromArray($request->validated())
+//     );
+
+//     return response()->json($department, 201);
+// }
+
+// public function show(Department $department)
+// {
+//     return response()->json(new DepartmentResources($department));
+// }
+
+// public function update(UpdateDepartmentRequest $request, Department $department)
+// {
+//     $updated = $this->department_service->update(
+//         $department->id,
+//         DepartmentData::fromArray($request->validated())
+//     );
+
+//     return response()->json($updated);
+// }
+
+// public function destroy(Department $department)
+// {
+//     $this->department_service->delete($department->id);
+
+//     return response()->json(['message' => 'Department deleted successfully.']);
+// }
+// }

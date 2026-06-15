@@ -24,13 +24,14 @@ class StoreDepartmentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'tenant_id' => 'required|integer',
             'name' => 'required|string|max:100',
             'code' => 'required|string|max:50',
-            Rule::unique('departments','code')
-            ->where('tenant_id', $this->user()->tenant_id)
-            ->ignore($this->route('departments')),
-
+            // Rule::unique('departments','code')
+            // ->where('tenant_id', $this->user()->tenant_id)
+            // ->ignore($this->route('departments')), ],
+            'status'=> 'nullable|string',
             'description'=> 'nullable|string|max:1300',
-        ];
+         ];
     }
 }
