@@ -23,9 +23,12 @@ class DepartmentService
         protected DeleteDepartmentAction $deleteAction )
     {  }
 
-    public function list (array $filters=[], int $perPage =15 ) : LengthAwarePaginator
+    public function list(string $search='', int $perPage =15 ) : LengthAwarePaginator
     {
-        return $this->department_repository->paginate($filters, $perPage);
+        return $this->department_repository->paginate(
+            filters :['search'=> $search],
+            perPage: $perPage,
+        );
     }
     public function find(int $id): Department
     {
