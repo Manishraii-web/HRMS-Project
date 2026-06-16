@@ -16,28 +16,28 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Departments',
-        href: '#',
+        href: '/departments',
         icon: Building2,
     },
     {
         title: 'Employees',
-        href: '#',
+        href: '/employees',
         icon: Users,
     },
     {
         title: 'Attendances',
-        href: '#',
+        href: '/attendances',
         icon:Clock,
     },
      {
         title: 'Leaves',
-        href: '#',
+        href: '/leaves',
         icon:CalendarOff,
 
     },
      {
         title: 'Payroll',
-        href: '#',
+        href: '/payroll',
         icon:Wallet,
     },
 ];

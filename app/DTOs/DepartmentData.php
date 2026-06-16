@@ -4,32 +4,42 @@ namespace App\DTOs;
 
 use App\Enums\DepartmentStatus;
 
-class DepartmentData {
+class DepartmentData
+{
     public function __construct(
-        public readonly int $tenantId,
         public readonly string $name,
         public readonly string $code,
         public readonly ?string $description = null,
-        public readonly DepartmentStatus $status = DepartmentStatus::Active,) { }
+        public readonly DepartmentStatus $status = DepartmentStatus::Active,
+        public readonly ?int $tenantId = null,
+    ) {}
 
-        public static function fromArray(array $data):self  {
-            return new self(
-                tenantId: $data['tenant_id'],
-                name: $data['name'],
-                code : $data['code'],
-                description: $data['description'] ??null,
-                status: isset($data['status'])
-                  ? DepartmentStatus::from($data['status']) : DepartmentStatus::Active,
-                );
-        }
-        public function toArray(): array
-        {
-            return [
-            'tenant_id' => $this->tenantId,
-            'name' => $this->name,
-            'code' =>$this->code,
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            name: $data['name'],
+            code: $data['code'],
+            description: $data['description'] ?? null,
+            status: isset($data['status'])
+                ? DepartmentStatus::from($data['status'])
+                : DepartmentStatus::Active,
+            tenantId: $data['tenant_id'] ?? null,
+        );
+    }
+
+    public function toArray(): array
+    {
+        $result = [
+            'name'        => $this->name,
+            'code'        => $this->code,
             'description' => $this->description,
-            'status' => $this->status->value,
-            ];
+            'status'      => $this->status->value,
+        ];
+
+        if ($this->tenantId !== null) {
+            $result['tenant_id'] = $this->tenantId;
         }
+
+        return $result;
+    }
 }

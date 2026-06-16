@@ -22,9 +22,14 @@ class UpdateDepartmentRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'code' => 'required|string|max:50',
-            Rule::unique('departments','code')->where('tentent_id', $this->user->tenent_id),
-            'description' => 'nullable|textmax:1300'
+           'code'        => [
+            'required',
+            'string',
+            'max:50',
+            Rule::unique('departments', 'code')->ignore($this->route('department')),
+        ],
+            'status' => 'nullable|string',
+            'description' => 'nullable|string|max:1300'
         ];
     }
 }
