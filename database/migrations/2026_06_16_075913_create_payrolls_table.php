@@ -26,12 +26,10 @@ return new class extends Migration
                 $table->decimal('medical_allowance', 12, 2)->nullable()->default(0);
                 $table->decimal('other_allowance', 12, 2)->nullable()->default(0);
                 $table->decimal('gross_salary', 12, 2)->nullable()->default(0);
-                // Deductions
                 $table->decimal('provident_fund', 12, 2)->nullable()->default(0);
                 $table->decimal('tax_deduction', 12, 2)->nullable()->default(0);
                 $table->decimal('other_deduction', 12, 2)->nullable()->default(0);
                 $table->decimal('total_deductions', 12, 2)->nullable()->default(0);
-                // Net
                 $table->decimal('net_salary', 12, 2)->nullable()->default(0);
                 // Attendance context
                 $table->integer('working_days')->nullable();
@@ -41,13 +39,12 @@ return new class extends Migration
                 $table->string('status')->nullable();
                 $table->timestamp('paid_at')->nullable();
                 $table->text('notes')->nullable();
-
-                $table->timestamps();
-                $table->softDeletes();
-
                 $table->unique(['tenant_id', 'employee_id', 'month', 'year']);
                 $table->index(['tenant_id', 'month', 'year']);
                 $table->index(['tenant_id', 'status']);
+
+                $table->timestamps();
+                $table->softDeletes();
             });
         });
     }
