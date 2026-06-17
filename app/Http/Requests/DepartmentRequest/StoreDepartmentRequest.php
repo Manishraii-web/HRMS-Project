@@ -4,6 +4,7 @@ namespace App\Http\Requests\DepartmentRequest;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class StoreDepartmentRequest extends FormRequest
@@ -23,14 +24,13 @@ class StoreDepartmentRequest extends FormRequest
      */
     public function rules(): array
     {
+        $tenantId = Auth::user()->tenant_id;
         return [
             // 'tenant_id' => 'required|integer',
-            'name' => 'required|string|max:100',
-             'code'        => [
-            'required',
-            'string',
-            'max:50',
-            Rule::unique('departments', 'code'),
+            'name' => [ 'required','string','max:100',
+                   Rule::unique('departments','name')->where('tenant_id',$tenantId)->whereNull('deleted_at'),],
+             'code' => [ 'required','string','max:50',
+                   Rule::unique('departments', 'code')->where('tenant_id', $tenantId)->whereNull('deleted_at'),
         ],
             'status'=> 'nullable|string',
             'description'=> 'nullable|string|max:1300',

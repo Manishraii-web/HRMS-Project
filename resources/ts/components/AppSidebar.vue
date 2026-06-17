@@ -16,7 +16,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Departments',
-        href: '/departments',
+        href: route('departments.index'),
         icon: Building2,
     },
     {
