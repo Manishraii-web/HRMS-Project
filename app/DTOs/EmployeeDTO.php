@@ -47,7 +47,7 @@ class EmployeeDTO {
         nationality: $data['nationality'] ?? null,
         address: $data['address'] ?? null,
         avatar: $data['avatar'] ?? null,
-        employementType: $data['employement_type'] ?? null,
+        employmentType: $data['employment_type'] ?? null,
         terminationDate: $data['termination_date'] ?? null,
         status: $data['status'] ?? null,
         bankName: $data['bank_name'] ?? null,
