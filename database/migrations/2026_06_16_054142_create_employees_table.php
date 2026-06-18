@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tenant_id')->nullable()->constrained('tenants')->cascadeOnDelete();
-            $table->foreignId('department_id')->constrained('departments')->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('department_id')->nullable()->constrained('departments')->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('employee_code')->nullable();
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('gender')->nullable();
             $table->timestamp('date_of_birth')->nullable();
@@ -27,9 +27,9 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->string('avatar')->nullable();
 
-            $table->string('job_title');
+            $table->string('job_title')->nullable();
             $table->string('employment_type')->nullable();
-            $table->timestamp('hire_date');
+            $table->timestamp('hire_date')->nullable();
             $table->timestamp('termination_date')->nullable();
             $table->string('status')->nullable();
 
@@ -39,8 +39,6 @@ return new class extends Migration
 
             $table->string('nid_number')->nullable();
             $table->string('pan_number')->nullable();
-            $table->unique(['tenant_id', 'employee_code']);
-            $table->unique(['tenant_id', 'email']);
             $table->index(['tenant_id', 'department_id']);
             $table->index(['tenant_id', 'status']);
 
