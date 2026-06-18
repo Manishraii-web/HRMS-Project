@@ -21,10 +21,6 @@ class StoreDepartmentRequest extends FormRequest
         $tenantId = $this->user()->tenant_id;
         abort_if(is_null($tenantId), 403, 'No Tenant ID assign to this user');
 
-        DB::listen(function ($query) {
-            Log::info('VALIDATION SQL: ' . $query->sql, $query->bindings);
-        });
-
         return [
             'name' => [
                 'required', 'string', 'max:100',

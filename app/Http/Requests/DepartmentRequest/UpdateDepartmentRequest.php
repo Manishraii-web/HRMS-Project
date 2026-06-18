@@ -15,7 +15,7 @@ class UpdateDepartmentRequest extends FormRequest
     {
         return true;
     }
-     /*
+    /*
      * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
@@ -25,15 +25,18 @@ class UpdateDepartmentRequest extends FormRequest
         abort_if(is_null($tenantId), 403, 'No Tenant ID assign to this user');
 
         return [
-            'name' => ['required','string','max:255',
-               Rule::unique('departments', 'name')->where('tenant_id', $tenantId)->whereNull('deleted_at')->ignore($department),
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('departments', 'name')->where('tenant_id', $tenantId)->whereNull('deleted_at')->ignore($department),
             ],
-           'code'        => [
-            'required',
-            'string',
-            'max:50',
-            Rule::unique('departments', 'code')->where('tenant_id', $tenantId)->whereNUll('deleted_at')->ignore($department),
-        ],
+            'code'        => [
+                'required',
+                'string',
+                'max:50',
+                Rule::unique('departments', 'code')->where('tenant_id', $tenantId)->whereNUll('deleted_at')->ignore($department),
+            ],
             'status' => 'nullable|string',
             'description' => 'nullable|string|max:1300'
         ];
