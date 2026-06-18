@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\DepartmentStatus;
 use App\Models\Department;
+use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,7 +25,7 @@ class DepartmentFactory extends Factory
             'Customer Success', 'Research & Development',
             ]);
             return  [
-                'tenant_id'=>1,
+                'tenant_id'=> Tenant::value('id'),
                 'name' => $name,
                 'code' => strtoupper(substr(str_replace([' ','&'],'',$name),0,6)) . fake()->numberBetween(10, 99),
                 'description'=>fake()->sentence(10),

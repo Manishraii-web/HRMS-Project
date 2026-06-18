@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-      Tenant::create([
+     $tenant=  Tenant::create([
         'name' =>'Default Company',
         'slug' => 'default-company',
         'status' => 'active',
@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'tenant_id' => $tenant->id,
         ]);
 
     $this->call([
