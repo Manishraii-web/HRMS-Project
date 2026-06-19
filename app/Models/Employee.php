@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Employee extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $fillable =[
         'tenant_id',
         'department_id',
@@ -25,7 +26,7 @@ class Employee extends Model
         'address',
         'avatar',
         'job_title',
-        'employement_type',
+        'employment_type',
         'hire_date',
         'termination_date',
         'status',
