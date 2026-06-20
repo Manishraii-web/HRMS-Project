@@ -1,0 +1,72 @@
+<?php
+
+namespace App\Http\Controllers\Employee;
+
+use App\Actions\Employee\UpdateEmployeeAction;
+use App\DTOs\EmployeeDTO;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Employee\StoreEmployeeRequest;
+use App\Http\Requests\Employee\UpdateEmployeeRequest;
+use App\Http\Resources\Employee\EmployeeResource;
+use App\Models\Employee;
+use App\Services\Employee\EmployeeService;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+
+class EmployeeController extends Controller
+{
+   public function __construct(protected EmployeeService $employeeService){}
+   public function index(Request $request) {
+    $employees = $this->employeeService->list(
+        search: $request->string('search')->toString(),
+        departmentId: $request->integer('department_id') ?: null,
+         perPage: 10,);
+
+    return Inertia::render('Employees/Index', [
+        'employees' => EmployeeResource::collection($employees),
+        'filters' => [
+            'search' => $request->input('search',''),
+            'department_id' => $request->input('departmentId',''),
+           ],
+    ]);
+
+   }
+   public function create()
+   {
+    return Inertia::render('Employees/Create');
+   }
+
+   public function store(StoreEmployeeRequest $request)
+   {
+    $this->employeeService->create(EmployeeDTO::fromArray($request->validated()));
+    return redirect()
+    ->route('employees.index')->with('success','Employeee created Succssfully');
+   }
+
+   public function show(Employee $employee)
+   {
+    return Inertia::render('Employees/Show',
+    ['employee' => new EmployeeResource($employee->load('department')),
+    ]);
+   }
+
+   public function edit(Employee $employee){
+    return Inertia::render('Employees/Edit', [
+        'employee' => new EmployeeResource($employee->load('department'))
+    ]);
+   }
+
+   public function update(UpdateEmployeeRequest $request, Employee $employee)
+   {
+    $this->employeeService->update($employee, EmployeeDTO::fromArray($request->validated()));
+    return redirect()->route('employees.index')->with('success',' Employee Data update Successfully..');
+   }
+
+   public function destroy(Employee $employee)
+   {
+     $this->employeeService->delete($employee);
+     return redirect()->route('employees.index')->with('success', 'Data Deleted Successfully');
+   }
+
+}
+
