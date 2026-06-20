@@ -29,7 +29,7 @@ class UpdateEmployeeRequest extends FormRequest
         return [
             'department_id' =>[
                 'required','integer',
-                Rule::exists('departments','id')->where('tenant_id', $tenantId),
+                Rule::exists('departments','id')->where('tenant_id', $tenantId)->whereNull('deleted_at'),
         ],
         'user_id' => 'required|integer|exists:users,id',
 
@@ -51,13 +51,13 @@ class UpdateEmployeeRequest extends FormRequest
             'date_of_birth' => 'required|string|before:today',
             'nationality' => 'required|string',
             'address' => 'required|string|max:150',
-            'avatar' => 'required|string|max:200',
+            'avatar' => 'nullable|string|max:200',
             'job_title' => 'required|string|max:100',
-            'employment_type' => 'required|string|in:part_time,intern,contract',
+            'employment_type' => 'required|string|in:full_time,part_time,intern,contract',
             'hire_date' => 'required|date',
-            'termination_date' => 'required|date|after_or_equal:hire_date',
+            'termination_date' => 'nullable|date|after_or_equal:hire_date',
             'status' => 'required|string|in:active,inactive,terminated',
-            'basic_salary' => 'nullable|numeric|max:0',
+            'basic_salary' => 'nullable|numeric|min:0',
             'bank_name' => 'nullable|string|max:100',
             'bank_account_number' => 'nullable|string|max:30',
             'nid_number' => 'nullable|string|',
