@@ -3,7 +3,7 @@
 namespace App\Services\Employee;
 
 use App\Actions\Employee\UpdateEmployeeAction;
-use App\Actions\Employee\CreateemployeeAction;
+use App\Actions\Employee\CreateEmployeeAction;
 use App\Actions\Employee\DeleteEmployeeAction;
 use App\DTOs\EmployeeDTO;
 use App\Models\Employee;
@@ -14,7 +14,7 @@ class EmployeeService
 {
     public function __construct(
         protected EmployeeRepositoryInterface $employee_repository,
-        protected CreateemployeeAction $createEmployeeAction,
+        protected CreateEmployeeAction $createEmployeeAction,
         protected UpdateEmployeeAction $updateEmployeeAction,
         protected DeleteEmployeeAction $deleteEmployeeAction
     ) { }
@@ -40,12 +40,12 @@ class EmployeeService
 
     public function update(Employee $employee, EmployeeDTO $data): Employee
     {
-        return $this->employee_repository->update($employee, $data );
+        return $this->updateEmployeeAction->execute($employee, $data );
     }
 
     public function delete(Employee $employee)
     {
-        return $this->employee_repository->delete($employee);
+        return $this->deleteEmployeeAction->execute($employee);
     }
 
 }

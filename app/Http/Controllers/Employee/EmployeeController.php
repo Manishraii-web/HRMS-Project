@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Employee\StoreEmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
 use App\Http\Resources\Employee\EmployeeResource;
+use App\Models\Department;
 use App\Models\Employee;
 use App\Services\Employee\EmployeeService;
 use Illuminate\Http\Request;
@@ -24,16 +25,19 @@ class EmployeeController extends Controller
 
     return Inertia::render('Employees/Index', [
         'employees' => EmployeeResource::collection($employees),
+        'departments' =>Department::query()->select('id','name')->orderBy('name')->get(),
         'filters' => [
             'search' => $request->input('search',''),
-            'department_id' => $request->input('departmentId',''),
+            'department_id' => $request->input('department_id',''),
            ],
     ]);
 
    }
    public function create()
    {
-    return Inertia::render('Employees/Create');
+    return Inertia::render('Employees/Create',[
+        'departments'=> Department::query()->select('id','name')->orderBy('name')->get(),
+    ]);
    }
 
    public function store(StoreEmployeeRequest $request)
@@ -52,7 +56,9 @@ class EmployeeController extends Controller
 
    public function edit(Employee $employee){
     return Inertia::render('Employees/Edit', [
-        'employee' => new EmployeeResource($employee->load('department'))
+        'employee' => new EmployeeResource($employee->load('department')),
+                'departments'=> Department::query()->select('id','name')->orderBy('name')->get(),
+
     ]);
    }
 
