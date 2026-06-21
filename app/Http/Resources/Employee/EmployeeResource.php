@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class EmployeeResource extends JsonResource
 {
+     public static $wrap = null;
     /**
      * Transform the resource into an array.
      *
@@ -14,6 +15,7 @@ class EmployeeResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+
         return [
             'id' => $this->id,
             'department_id' => $this->department_id,

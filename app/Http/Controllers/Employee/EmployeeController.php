@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Actions\Employee\UpdateEmployeeAction;
-use App\DTOs\EmployeeDTO;
+use App\DTOs\EmployeeData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Employee\StoreEmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
@@ -42,7 +42,7 @@ class EmployeeController extends Controller
 
    public function store(StoreEmployeeRequest $request)
    {
-    $this->employeeService->create(EmployeeDTO::fromArray($request->validated()));
+    $this->employeeService->create(EmployeeData::fromArray($request->validated()));
     return redirect()
     ->route('employees.index')->with('success','Employeee created Succssfully');
    }
@@ -64,7 +64,7 @@ class EmployeeController extends Controller
 
    public function update(UpdateEmployeeRequest $request, Employee $employee)
    {
-    $this->employeeService->update($employee, EmployeeDTO::fromArray($request->validated()));
+    $this->employeeService->update($employee, EmployeeData::fromArray($request->validated()));
     return redirect()->route('employees.index')->with('success',' Employee Data update Successfully..');
    }
 

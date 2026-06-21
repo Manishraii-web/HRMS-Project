@@ -70,7 +70,7 @@ class StoreEmployeeRequest extends FormRequest
             'basic_salary' => 'nullable|numeric|min:0',
             'bank_name' => 'nullable|string|max:100',
             'bank_account_number' => 'nullable|string|max:30',
-            'nid_number' => 'nullable|string|',
+            'nid_number' => 'nullable|string',
             'pan_number' => 'nullable|string|max:100',
 
 

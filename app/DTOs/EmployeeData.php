@@ -2,7 +2,7 @@
 
 namespace App\DTOs;
 
-class EmployeeDTO {
+class EmployeeData {
     public function __construct(
         public readonly int $departmentId,
         public readonly string $email,

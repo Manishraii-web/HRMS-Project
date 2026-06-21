@@ -5,7 +5,7 @@ namespace App\Services\Employee;
 use App\Actions\Employee\UpdateEmployeeAction;
 use App\Actions\Employee\CreateEmployeeAction;
 use App\Actions\Employee\DeleteEmployeeAction;
-use App\DTOs\EmployeeDTO;
+use App\DTOs\EmployeeData;
 use App\Models\Employee;
 use App\Repositories\Contracts\EmployeeRepositoryInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -33,12 +33,12 @@ class EmployeeService
         return $this->employee_repository->findOrFail($id);
 
     }
-    public function create(EmployeeDTO $data): Employee
+    public function create(EmployeeData $data): Employee
     {
         return $this->createEmployeeAction->execute($data);
     }
 
-    public function update(Employee $employee, EmployeeDTO $data): Employee
+    public function update(Employee $employee, EmployeeData $data): Employee
     {
         return $this->updateEmployeeAction->execute($employee, $data );
     }

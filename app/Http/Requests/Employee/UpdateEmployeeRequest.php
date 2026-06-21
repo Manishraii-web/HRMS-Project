@@ -31,10 +31,10 @@ class UpdateEmployeeRequest extends FormRequest
                 'required','integer',
                 Rule::exists('departments','id')->where('tenant_id', $tenantId)->whereNull('deleted_at'),
         ],
-        'user_id' => 'required|integer|exists:users,id',
+        'user_id' => 'nullable|integer|exists:users,id',
 
         'employee_code' => [
-            'required|string|max:35',
+            'required','string','max:35',
             Rule::unique('employees','employee_code')->where('tenant_id',$tenantId)->whereNull('deleted_at')->ignore($employee),
         ],
          'firstname' => 'required|string|max:100',
@@ -60,7 +60,7 @@ class UpdateEmployeeRequest extends FormRequest
             'basic_salary' => 'nullable|numeric|min:0',
             'bank_name' => 'nullable|string|max:100',
             'bank_account_number' => 'nullable|string|max:30',
-            'nid_number' => 'nullable|string|',
+            'nid_number' => 'nullable|string',
             'pan_number' => 'nullable|string|max:100',
 
 
