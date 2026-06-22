@@ -64,8 +64,7 @@ function submit() {
                             <label class="block text-sm font-medium mb-1">
                                 First Name <span class="text-destructive">*</span>
                             </label>
-                            <input
-                                v-model="form.firstname"
+                            <input v-model="form.firstname"
                                 type="text"
                                 class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                                 :class="{ 'border-destructive': form.errors.firstname }"
@@ -77,8 +76,7 @@ function submit() {
                             <label class="block text-sm font-medium mb-1">
                                 Last Name <span class="text-destructive">*</span>
                             </label>
-                            <input
-                                v-model="form.lastname"
+                            <input v-model="form.lastname"
                                 type="text"
                                 class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                                 :class="{ 'border-destructive': form.errors.lastname }"
@@ -91,8 +89,7 @@ function submit() {
                         <label class="block text-sm font-medium mb-1">
                             Email <span class="text-destructive">*</span>
                         </label>
-                        <input
-                            v-model="form.email"
+                        <input v-model="form.email"
                             type="email"
                             class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                             :class="{ 'border-destructive': form.errors.email }"
@@ -103,8 +100,7 @@ function submit() {
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-medium mb-1">Phone</label>
-                            <input
-                                v-model="form.phone"
+                            <input v-model="form.phone"
                                 type="text"
                                 class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                             />
@@ -113,8 +109,7 @@ function submit() {
 
                         <div>
                             <label class="block text-sm font-medium mb-1">Gender</label>
-                            <select
-                                v-model="form.gender"
+                            <select v-model="form.gender"
                                 class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                             >
                                 <option value="">Select...</option>
@@ -128,8 +123,7 @@ function submit() {
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-medium mb-1">Date of Birth</label>
-                            <input
-                                v-model="form.date_of_birth"
+                            <input v-model="form.date_of_birth"
                                 type="date"
                                 class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                             />
@@ -138,8 +132,7 @@ function submit() {
 
                         <div>
                             <label class="block text-sm font-medium mb-1">Nationality</label>
-                            <input
-                                v-model="form.nationality"
+                            <input v-model="form.nationality"
                                 type="text"
                                 class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                             />
@@ -148,8 +141,7 @@ function submit() {
 
                     <div>
                         <label class="block text-sm font-medium mb-1">Address</label>
-                        <textarea
-                            v-model="form.address"
+                        <textarea v-model="form.address"
                             rows="2"
                             class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                         />
@@ -165,8 +157,7 @@ function submit() {
                             <label class="block text-sm font-medium mb-1">
                                 Department <span class="text-destructive">*</span>
                             </label>
-                            <select
-                                v-model="form.department_id"
+                            <select v-model="form.department_id"
                                 class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                                 :class="{ 'border-destructive': form.errors.department_id }"
                             >
@@ -182,8 +173,7 @@ function submit() {
                             <label class="block text-sm font-medium mb-1">
                                 Employee Code <span class="text-destructive">*</span>
                             </label>
-                            <input
-                                v-model="form.employee_code"
+                            <input v-model="form.employee_code"
                                 type="text"
                                 placeholder="e.g. EMP004"
                                 class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm font-mono bg-background focus:outline-none focus:ring-2 focus:ring-primary"
@@ -197,8 +187,7 @@ function submit() {
                         <label class="block text-sm font-medium mb-1">
                             Job Title <span class="text-destructive">*</span>
                         </label>
-                        <input
-                            v-model="form.job_title"
+                        <input v-model="form.job_title"
                             type="text"
                             class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                             :class="{ 'border-destructive': form.errors.job_title }"
@@ -209,8 +198,7 @@ function submit() {
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-medium mb-1">Employment Type</label>
-                            <select
-                                v-model="form.employment_type"
+                            <select v-model="form.employment_type"
                                 class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                             >
                                 <option value="full_time">Full Time</option>
@@ -222,8 +210,7 @@ function submit() {
 
                         <div>
                             <label class="block text-sm font-medium mb-1">Status</label>
-                            <select
-                                v-model="form.status"
+                            <select v-model="form.status"
                                 class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                             >
                                 <option value="active">Active</option>
@@ -238,8 +225,7 @@ function submit() {
                             <label class="block text-sm font-medium mb-1">
                                 Hire Date <span class="text-destructive">*</span>
                             </label>
-                            <input
-                                v-model="form.hire_date"
+                            <input v-model="form.hire_date"
                                 type="date"
                                 class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                                 :class="{ 'border-destructive': form.errors.hire_date }"
@@ -249,8 +235,7 @@ function submit() {
 
                         <div>
                             <label class="block text-sm font-medium mb-1">Termination Date</label>
-                            <input
-                                v-model="form.termination_date"
+                            <input v-model="form.termination_date"
                                 type="date"
                                 class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                             />
@@ -260,8 +245,7 @@ function submit() {
 
                     <div v-if="form.employment_type !== 'intern'">
                         <label class="block text-sm font-medium mb-1">Basic Salary</label>
-                        <input
-                            v-model="form.basic_salary"
+                        <input v-model="form.basic_salary"
                             type="number"
                             step="0.01"
                             class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
@@ -277,8 +261,7 @@ function submit() {
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-medium mb-1">Bank Name</label>
-                            <input
-                                v-model="form.bank_name"
+                            <input v-model="form.bank_name"
                                 type="text"
                                 class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                             />
@@ -287,8 +270,7 @@ function submit() {
 
                         <div>
                             <label class="block text-sm font-medium mb-1">Bank Account Number</label>
-                            <input
-                                v-model="form.bank_account_number"
+                            <input v-model="form.bank_account_number"
                                 type="text"
                                 class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm font-mono bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                             />
@@ -299,8 +281,7 @@ function submit() {
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-medium mb-1">NID Number</label>
-                            <input
-                                v-model="form.nid_number"
+                            <input v-model="form.nid_number"
                                 type="text"
                                 class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm font-mono bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                             />
@@ -308,8 +289,7 @@ function submit() {
 
                         <div>
                             <label class="block text-sm font-medium mb-1">PAN Number</label>
-                            <input
-                                v-model="form.pan_number"
+                            <input v-model="form.pan_number"
                                 type="text"
                                 class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm font-mono bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                             />
