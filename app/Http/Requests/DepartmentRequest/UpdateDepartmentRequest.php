@@ -12,8 +12,10 @@ class UpdateDepartmentRequest extends FormRequest
     {
         return true;
     }
+
       public function rules(): array
     {
+
         $tenantId = $this->user()->tenant_id;
         $department = $this->route('department');
         abort_if(is_null($tenantId), 403, 'No Tenant ID assign to this user');

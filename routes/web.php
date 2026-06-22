@@ -25,10 +25,10 @@ Route::post('/sanctum/login', function (Request $request) {
     return response()->json(['token' => $token]);
 });
 
-Route::middleware(['auth', 'verified'])->group(function(){
+// Route::middleware(['auth', 'verified'])->group(function(){
     Route::resource('departments', DepartmentController::class);
     Route::resource('employees',EmployeeController::class);
-});
+// });
 
 
 require __DIR__.'/settings.php';

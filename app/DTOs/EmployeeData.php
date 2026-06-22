@@ -61,9 +61,9 @@ class EmployeeData {
     public function toArray(): array
     {
         return [
-            'department_id'       => $this->departmentId,
-            'user_id'             => $this->userId,
-            'employee_code'       => $this->employeeCode,
+            'department_id'   => $this->departmentId,
+            'user_id'         => $this->userId,
+            'employee_code'    => $this->employeeCode,
             'firstname'           => $this->firstname,
             'lastname'            => $this->lastname,
             'email'               => $this->email,
