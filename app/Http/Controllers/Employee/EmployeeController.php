@@ -20,7 +20,7 @@ class EmployeeController extends Controller
 
    public function __construct(protected EmployeeService $employeeService){}
    public function index(Request $request) {
-    $this->authorize('viewAny','Employee::class');
+    $this->authorize('viewAny',Employee::class);
 
     $employees = $this->employeeService->list(
         search: $request->string('search')->toString(),
@@ -35,12 +35,11 @@ class EmployeeController extends Controller
             'department_id' => $request->input('department_id',''),
            ],
     ]);
-
    }
    //-------------------------------------------------------------------------------------------------
    public function create()
    {
-    $this->authorize('create','Employee::class');
+    $this->authorize('create',Employee::class);
     return Inertia::render('Employees/Create',[
         'departments'=> Department::query()->select('id','name')->orderBy('name')->get(),
     ]);
@@ -55,18 +54,17 @@ class EmployeeController extends Controller
 
    public function show(Employee $employee)
    {
-    $this->authorize('view','Employee::class');
+    $this->authorize('view', $employee);
     return Inertia::render('Employees/Show',
     ['employee' => new EmployeeResource($employee->load('department')),
     ]);
    }
 
    public function edit(Employee $employee){
-    $this->authorize('update','Employee::class');
+    $this->authorize('update', $employee);
     return Inertia::render('Employees/Edit', [
         'employee' => new EmployeeResource($employee->load('department')),
                 'departments'=> Department::query()->select('id','name')->orderBy('name')->get(),
-
     ]);
    }
 
@@ -78,7 +76,7 @@ class EmployeeController extends Controller
 
    public function destroy(Employee $employee)
    {
-    $this->authorize('delete','Employee::class');
+    $this->authorize('delete', $employee);
      $this->employeeService->delete($employee);
      return redirect()->route('employees.index')->with('success', 'Data Deleted Successfully');
    }

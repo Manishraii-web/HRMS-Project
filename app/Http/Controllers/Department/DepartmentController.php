@@ -19,6 +19,8 @@ class DepartmentController extends Controller
     { }
     public function index(Request $request)
     {
+        $this->authorize('viewAny', Department::class);
+
         $departments= $this->department_service->list(search: $request->string('search')->toString(), perPage : 10,);
 
         return Inertia::render('Departments/Index', [
@@ -27,44 +29,33 @@ class DepartmentController extends Controller
         ]);
 
     }
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create(): Response
     {
+        $this->authorize('create',Department::class);
         return Inertia::render('Departments/Create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreDepartmentRequest $request)
     {
         $this->department_service->create(DepartmentData::fromArray($request->validated()));
         return redirect()->route('departments.index')->with('success','Department Created Successfullyy.');
             }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Department $department)
     {
+        $this->authorize('view', $department);
        return Inertia::render('Departments/Show',['departments'=> new DepartmentResources($department)]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Department $department): Response
     {
+        $this->authorize('update', $department);
         return Inertia::render('Departments/Edit', [
             'department' => new DepartmentResources($department),
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateDepartmentRequest $request,  Department $department)
     {
         $this->department_service->update($department, DepartmentData::fromArray($request->validated()));
@@ -72,11 +63,9 @@ class DepartmentController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Department $department)
     {
+        $this->authorize('delete', $department);
      $this->department_service->delete($department);
      return redirect()->route('departments.index')->with('success','Data delete Sucessfull');
     }

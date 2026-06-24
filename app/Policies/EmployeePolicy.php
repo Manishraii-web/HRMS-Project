@@ -43,7 +43,7 @@ class EmployeePolicy
     public function delete(User $user, Employee $employee): bool
     {
         return $user->tenant_id === $employee->tenant_id
-        && $user->can('employees.delete');
+        && $user->can('employees.deactivate');
     }
 
     //---------------------------------------------------------------------

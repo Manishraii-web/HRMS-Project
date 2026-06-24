@@ -16,23 +16,23 @@ class DepartmentPolicy
 //----------------------------------------------------------------
     public function view(User $user, Department $department): bool
     {
-        $user->tenant_id === $department->tenant_id && $user->can('departments.view');
-        return false;
+        return $user->tenant_id === $department->tenant_id && $user->can('departments.view');
+
     }
 //----------------------------------------------------------------------------------------------
     public function create(User $user): bool
     {
-        return $user->can('deparmtents.create');
+        return $user->can('departments.create');
     }
     //-----------------------------------------------------------------------------------------
     public function update(User $user, Department $department): bool
     {
-        return $user->tenant_id == $department->tenant_id && $user->can('departments.create');
+        return $user->tenant_id === $department->tenant_id && $user->can('departments.update');
     }
 //------------------------------------------------------------------------------------------------
     public function delete(User $user, Department $department): bool
     {
-        return $user->tenant_id == $department->tenant_id && $user->can('departments.delete');
+        return $user->tenant_id === $department->tenant_id && $user->can('departments.deactivate');
     }
 //-------------------------------------------------------------------------------------------------------
     public function restore(User $user, Department $department): bool
@@ -40,9 +40,6 @@ class DepartmentPolicy
         return false;
     }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
     public function forceDelete(User $user, Department $department): bool
     {
         return false;

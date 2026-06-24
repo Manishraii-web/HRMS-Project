@@ -24,7 +24,7 @@ class RolePermissionSeeder extends Seeder
 
         'employees.view',
         'employees.create',
-        'employees.edit',
+        'employees.update',
         'employees.deactivate',
        ];
 
