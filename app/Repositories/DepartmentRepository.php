@@ -14,7 +14,9 @@ class DepartmentRepository implements DepartmentRepositoryInterface
 
     public function paginate(array $filters = [], int $perPage = 15): LengthAwarePaginator
     {
-        return $this->model->newQuery()->when($filters['search'] ?? null, function ($query, $search) {
+        return $this->model->newQuery()
+        ->withCount('employees')
+        ->when($filters['search'] ?? null, function ($query, $search) {
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
                 ->orWhere('code', 'like', "%{$search}%");

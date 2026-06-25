@@ -26,9 +26,12 @@ watch(search, (value) => {
     })
 })
 
-function destroy(id: number) {
-    if (!confirm('Are you sure you want to delete this department?')) return
-    router.delete(route('departments.destroy', id))
+function destroy(department: {id: number; employees_count: number}) {
+    const message = department.employees_count > 0
+   ? `This department has ${department.employees_count} employee${department.employees_count !== 1 ? 's' : ''}. Deleting it will also remove their employee record${department.employees_count !== 1 ? 's' : ''}. Continue?`
+        : 'Are you sure you want to delete this department?'
+    if(!confirm(message)) return
+    router.delete(route('departments.destroy', department.id))
 }
 </script>
 
@@ -110,7 +113,7 @@ function destroy(id: number) {
                                 <a :href="route('departments.edit', dept.id)"
                                    class="text-primary hover:underline text-xs">Edit</a>
                                 <button
-                                    @click="destroy(dept.id)"
+                                    @click="destroy(dept)"
                                     class="text-destructive hover:underline text-xs"
                                 >Delete</button>
                             </td>

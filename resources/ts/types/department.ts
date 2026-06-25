@@ -4,6 +4,7 @@ export interface Department {
     code: string
     description: string | null
     status: 'active' | 'inactive'
+    employees_count: string
     created_at: string
 }
 

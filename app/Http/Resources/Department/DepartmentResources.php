@@ -21,6 +21,7 @@ class DepartmentResources extends JsonResource
             'code'=> $this->code,
             'description'=> $this->description,
             'status' => $this->status,
+            'employees_count' => $this->employees_count,
             'created_at' => $this->created_at,
         ];
     }
