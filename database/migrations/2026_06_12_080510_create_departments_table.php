@@ -14,10 +14,10 @@ return new class extends Migration
     Schema::create('departments', function (Blueprint $table) {
         $table->id();
         $table->foreignId('tenant_id')->nullable()->constrained('tenants')->cascadeOnDelete();
-        $table->string('name');
-        $table->string('code', 20);
+        $table->string('name')->nullable();
+        $table->string('code', 20)->nullable();
         $table->text('description')->nullable();
-        $table->string('status')->default('active');
+        $table->string('status')->default('active')->nullable();
         $table->timestamps();
         $table->softDeletes();
     });
