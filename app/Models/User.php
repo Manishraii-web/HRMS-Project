@@ -18,7 +18,7 @@ class User extends Authenticatable //implements MustVerifyEmail
      *
      * @var list<string>
      */
-    protected $fillable = [
+    protected $fillable = [  /** @use HasFactory<\Database\Factories\UserFactory> */
         'name',
         'email',
         'password',
