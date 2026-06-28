@@ -1,10 +1,11 @@
 <?php
 namespace App\Repositories\Contracts;
 
+use Illuminate\Support\Collection;
+
 interface DepartmentRepositoryInterface extends BaseRepositoryInterface
 {
-     //  Department-specific methods will be added here later
-    //   e.g. activeDepartments(), findByCode(string $code)
+     public function options(int $tenantId): Collection;
 }
 
 

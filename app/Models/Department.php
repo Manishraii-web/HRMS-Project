@@ -19,12 +19,13 @@ class Department extends Model
         'name',
         'code',
         'description',
-        'status'
-
+        'status',
+        // 'head_employee_id'
     ];
     protected function casts(): array {
         return [
         'status' => DepartmentStatus::class,
+        'tenant_id' => 'integer',
         ];
     }
     public function tenant(): BelongsTo {
@@ -33,4 +34,10 @@ class Department extends Model
     public function employees(): HasMany{
         return $this->hasMany(Employee::class);
     }
+
+
+    // public function head(): BelongsTo
+    // {
+    //     return $this->belongsTo(Employee::class,'head_employee_id');
+    // }
 }

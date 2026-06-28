@@ -6,6 +6,7 @@ use App\Models\Department;
 use App\Repositories\Contracts\DepartmentRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
+ use Illuminate\Support\Collection;
 
 
 class DepartmentRepository implements DepartmentRepositoryInterface
@@ -33,6 +34,15 @@ class DepartmentRepository implements DepartmentRepositoryInterface
     public function findOrFail(int $id): Model{
         return $this->model->findOrFail($id);
     }
+
+public function options(int $tenantId): Collection
+{
+    return $this->model->newQuery()
+        ->where('tenant_id', $tenantId)
+        ->select('id', 'name')
+        ->orderBy('name')
+        ->get();
+}
 
     public function create(array $data): Model{
         return $this->model->create($data);

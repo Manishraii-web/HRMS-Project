@@ -17,6 +17,7 @@ class DepartmentController extends Controller
 {
     public function __construct(protected DepartmentService $department_service)
     { }
+    //---------------------------------------------------------------------------------------------------------------
     public function index(Request $request)
     {
         $this->authorize('viewAny', Department::class);
@@ -29,48 +30,71 @@ class DepartmentController extends Controller
         ]);
 
     }
-
+//----------------------------------------------------------------------------------------------------------------------------
     public function create(): Response
     {
         $this->authorize('create',Department::class);
         return Inertia::render('Departments/Create');
     }
+//-----------------------------------------------------------------------------------------------------------------------
+   public function store(StoreDepartmentRequest $request)
+{
+    $dto = DepartmentData::fromArray(array_merge(
+        $request->validated(),
+        ['tenant_id' => $request->user()->tenant_id],
+    ));
 
-    public function store(StoreDepartmentRequest $request)
+    $this->department_service->create($dto);
+    return redirect()->route('departments.index')->with('success', 'Department created successfully.');
+}
+//---------------------------------------------------------------------------------------------------------------------
+    public function show(int $id)
     {
-        $this->department_service->create(DepartmentData::fromArray($request->validated()));
-        return redirect()->route('departments.index')->with('success','Department Created Successfullyy.');
-            }
+       $department = $this->department_service->find($id);
+       $this->authorize('view',$department);
 
-    public function show(Department $department)
-    {
-        $this->authorize('view', $department);
-       return Inertia::render('Departments/Show',['departments'=> new DepartmentResources($department)]);
+       return Inertia::render('Departments/Show',[
+        'department' => new DepartmentResources($department),
+       ]);
+
     }
-
-    public function edit(Department $department): Response
+//--------------------------------------------------------------------------------------------------------------------------
+    public function edit( int $id): Response
     {
+
+        $department = $this->department_service->find($id);
+
         $this->authorize('update', $department);
+
         return Inertia::render('Departments/Edit', [
             'department' => new DepartmentResources($department),
         ]);
     }
-
-    public function update(UpdateDepartmentRequest $request,  Department $department)
+//----------------------------------------------------------------------------------------------------------------------------------------------
+    public function update(UpdateDepartmentRequest $request,  int $id)
     {
-        $this->department_service->update($department, DepartmentData::fromArray($request->validated()));
+       $department = $this->department_service->find($id);
+         $this->authorize('update', $department);
+
+       $dto = DepartmentData::fromArray(array_merge(
+        $request->validated(), ['tenant_id' => $request->user()->tenant_id],
+       ));
+
+       $this->department_service->update($department, $dto);
         return redirect()->route('departments.index')->with('success','Data Update Successfully');
 
     }
-
-    public function destroy(Department $department)
+//------------------------------------------------------------------------------------------------------------------------------------------------
+    public function destroy($id)
     {
-        $this->authorize('delete', $department);
+       $department= $this->department_service->find($id);
+       $this->authorize('delete', $department);
+
      $this->department_service->delete($department);
      return redirect()->route('departments.index')->with('success','Data delete Sucessfull');
     }
 }
-
+//--------------------------------------------------------------------------------------------------------------------------------
 
 // public function index(Request $request)   //JSON
 // {

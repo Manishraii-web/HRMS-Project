@@ -10,6 +10,7 @@ use App\DTOs\DepartmentData;
 use App\Repositories\Contracts\DepartmentRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class DepartmentService
 {
@@ -34,6 +35,10 @@ class DepartmentService
     {
         return $this->department_repository->findOrFail($id);
     }
+    public function options(int $tenantId): Collection
+{
+    return $this->department_repository->options($tenantId);
+}
     public function create(DepartmentData $data):  Department
     {
         return $this->createAction->execute($data);

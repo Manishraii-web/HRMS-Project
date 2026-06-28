@@ -10,7 +10,7 @@ class UpdateDepartmentRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return $this->user()->can('update', $this->route('department'));
+        return $this->user()->can('departments.update');
     }
 
       public function rules(): array
@@ -27,7 +27,7 @@ class UpdateDepartmentRequest extends FormRequest
                 'max:255',
                 Rule::unique('departments', 'name')->where('tenant_id', $tenantId)->whereNull('deleted_at')->ignore($department),
             ],
-            'code'        => [
+            'code'=> [
                 'required',
                 'string',
                 'max:50',

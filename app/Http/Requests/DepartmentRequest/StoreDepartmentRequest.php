@@ -10,8 +10,7 @@ class StoreDepartmentRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return $this->user()->can('departments.create');
-    }
+return $this->user()->can('departments.update');    }
 
     public function rules(): array
     {

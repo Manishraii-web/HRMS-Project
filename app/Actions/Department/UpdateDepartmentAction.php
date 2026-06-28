@@ -10,9 +10,9 @@ class UpdateDepartmentAction
 {
     public function __construct(protected DepartmentRepositoryInterface $department_repository){}
 
-    public function execute(Department $department, DepartmentData $data): Department
+    public function execute( $id, DepartmentData $data): Department
     {
 
-    return $this->department_repository->update($department, $data->toArray());
+    return $this->department_repository->update($id, $data->toArray());
     }
 }
