@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Department\DepartmentController;
+use App\Http\Controllers\Designation\DesignationController;
 use App\Http\Controllers\Employee\EmployeeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,7 @@ Route::post('/sanctum/login', function (Request $request) {
 Route::middleware(['auth', 'verified'])->group(function(){
     Route::resource('departments', DepartmentController::class);
     Route::resource('employees',EmployeeController::class);
+    Route::resource('designations', DesignationController::class);
 });
 
 
