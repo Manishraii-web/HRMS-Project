@@ -52,13 +52,12 @@ class EmployeeController extends Controller
 
     public function store(StoreEmployeeRequest $request)
     {
-        $dto = EmployeeData::fromArray(array_merge(
+          $dto = EmployeeData::fromArray(array_merge(
             $request->validated(),
             ['tenant_id' => $request->user()->tenant_id],
         ));
 
-        $this->employeeService->create($dto);
-
+        $this->employeeService->store($dto);
         return redirect()->route('employees.index')
             ->with('success', 'Employee created successfully.');
     }

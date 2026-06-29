@@ -12,7 +12,7 @@ class UpdateDesignationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('departments.update');
+        return $this->user()->can('designations.update');
     }
 
     /**
@@ -24,9 +24,9 @@ class UpdateDesignationRequest extends FormRequest
     {
         return [
              'name' => 'required|string|max:100',
-            'level' => 'sometimes|integer|min:1',
+            'level' => 'nullable|integer|min:1',
             'description' => 'nullable|string|max:1000',
-            'status' => 'sometimes|string|in:active,inactive'
+            'status' => 'nullable|string|in:active,inactive'
         ];
     }
 }

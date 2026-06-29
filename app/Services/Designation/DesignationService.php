@@ -2,6 +2,7 @@
 
 namespace App\Services\Designation;
 
+use App\Actions\Designation\CreateDepartmentAction;
 use App\Actions\Designation\DeleteDesignationAction;
 use App\Actions\Designation\UpdateDesignationAction;
 use App\DTOs\DesignationData;

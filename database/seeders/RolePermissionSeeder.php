@@ -26,6 +26,11 @@ class RolePermissionSeeder extends Seeder
         'employees.create',
         'employees.update',
         'employees.deactivate',
+
+        'designations.view',
+        'designations.create',
+        'designations.update',
+        'designations.deactivate',
        ];
 
        foreach($permissions as $permission)
@@ -41,6 +46,7 @@ class RolePermissionSeeder extends Seeder
 
         $employee->syncPermissions([
             'employees.view',
+            // 'designations.view'
         ]);
     }
 }

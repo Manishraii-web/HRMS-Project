@@ -72,6 +72,7 @@ class StoreEmployeeRequest extends FormRequest
             'bank_account_number' => 'nullable|string|max:30',
             'nid_number' => 'nullable|string',
             'pan_number' => 'nullable|string|max:100',
+            // 'tenant_id' => 'nullable|string|max:100'
 
 
 

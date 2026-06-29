@@ -11,8 +11,8 @@ class DesignationData
 
     public readonly ?int $tenantId ,
     public readonly string $name,
-    public readonly int $level,
-    public readonly string $description ,
+    public readonly ?int $level,
+    public readonly ?string $description ,
     public readonly DepartmentStatus $status = DepartmentStatus::Active,
     ) {}
 
