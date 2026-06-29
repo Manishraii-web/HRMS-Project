@@ -1,7 +1,8 @@
 <?php
 
+namespace App\Actions\Designation;
+
 use App\DTOs\DesignationData;
-use App\Models\Designation;
 use App\Repositories\Contracts\DesignationRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 

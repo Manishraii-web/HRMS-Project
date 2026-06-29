@@ -18,6 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'departments',
             'employees/*',
             'employees',
+            //  'designations',
+            // 'designations/*',
         ]);
         $middleware->web(append: [
             HandleInertiaRequests::class,

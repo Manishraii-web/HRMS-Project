@@ -11,6 +11,7 @@ use App\Models\Designation;
 use App\Services\Designation\DesignationService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class DesignationController extends Controller
 {
@@ -51,7 +52,7 @@ class DesignationController extends Controller
     }
     //--------------------------------------------------------------------------------------------------------------------
 
-    public function edit(int $id) {
+    public function edit(int $id): Response {
         $designation = $this->designation_service->find($id);
         $this->authorize('update', $designation);
 
@@ -61,8 +62,9 @@ class DesignationController extends Controller
     }
     //-------------------------------------------------------------------------------
     public function update(UpdateDesignationRequest $request, int $id) {
+        // dd('controller reached');
         $designation = $this->designation_service->find($id);
-        $this->authorize('update','$designation');
+        $this->authorize('update',$designation);
 
         $dto = DesignationData::fromArray(array_merge(
             $request->validated(),
@@ -72,7 +74,7 @@ class DesignationController extends Controller
         return redirect()->route('designations.index')->with('success', ' Updation Successfull. ');
     }
     //------------------------------------------------------------------------------------------
-    public function destory($id){
+    public function destroy(int $id){
         $designation = $this->designation_service->find($id);
         $this->authorize('delete', $designation);
 

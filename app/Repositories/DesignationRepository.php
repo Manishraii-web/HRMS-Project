@@ -15,7 +15,7 @@ class DesignationRepository implements DesignationRepositoryInterface
     public function paginate(array $filters = [], int $perPage = 15): LengthAwarePaginator
     {
         return $this->model->newQuery()
-        ->withCount('employees')
+        // ->withCount('employees')
         ->when($filters['search'] ?? null, function ($query, $search){
             $query->where(function ($q) use ($search){
                 $q->where('name', 'like', "%{$search}%");

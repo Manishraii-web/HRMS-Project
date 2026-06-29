@@ -2,13 +2,12 @@
 
 namespace App\Services\Designation;
 
-use App\Actions\Designation\CreateDepartmentAction;
 use App\Actions\Designation\DeleteDesignationAction;
 use App\Actions\Designation\UpdateDesignationAction;
+use App\Actions\Designation\CreateDesignationAction;
 use App\DTOs\DesignationData;
 use App\Models\Designation;
 use App\Repositories\Contracts\DesignationRepositoryInterface;
-use CreateDesignationAction;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -25,7 +24,7 @@ class DesignationService
     )
     { }
 
-    public function list(string $search='', int $perPage) : LengthAwarePaginator
+    public function list(string $search='', int $perPage =15 ) : LengthAwarePaginator
     {
         return $this->designation_repository->paginate(
             filters: ['search' => $search],
@@ -46,7 +45,7 @@ class DesignationService
         return $this->update_designation->execute($data, $model);
     }
 
-    public function delete(Designation $model)
+    public function delete(Designation $model): bool
     {
         return $this->delete_designation->execute($model);
     }
