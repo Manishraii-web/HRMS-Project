@@ -4,6 +4,7 @@ namespace App\Http\Requests\Designation;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreDesignationRequest extends FormRequest
 {
@@ -23,7 +24,11 @@ class StoreDesignationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:100',
+            'name' => ['required','string','max:100',
+            Rule::unique('designations')
+            ->where('tenant_id', $this->user()->tenant_id)
+            ->whereNull('deleted_at')],
+            
             'level' => 'nullable|integer|min:1',
             'description' => 'nullable|string|max:1000',
             'status' => 'nullable|string|in:active,inactive'
