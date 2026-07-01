@@ -34,7 +34,7 @@ class Designation extends Model
         return $this->belongsTo(Tenant::class);
     }
     public function employees(): BelongsToMany{
-        return $this->belongsToMany(Employee::class, 'employees_designation')
-        ->withPivot(['tenant_id', 'from_date', 'to_date'])->withTimestamps();
+        return $this->belongsToMany(Employee::class, 'employee_designations')
+        ->withPivot(['id','tenant_id', 'from_date', 'to_date'])->withTimestamps();
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Employee extends Model
@@ -55,6 +56,17 @@ class Employee extends Model
     public function tenant() : BelongsTo {
         return $this->belongsTo(Tenant::class);
     }
+
+    public function designations() : BelongsToMany {
+        return $this->belongsToMany(Designation::class, 'employee_designations')
+        ->using(EmployeeDesignation::class)
+        ->withPivot(['id', 'tenant_id', 'from_date', 'to_date'])->withTimestamps();
+
+    }
+
+    public function currentDesignation(): BelongsToMany {
+        return $this->desinations()->wherePivot('to_date', null);
+        -
 
 
 }
