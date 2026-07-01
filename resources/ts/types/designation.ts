@@ -7,7 +7,7 @@ export interface Designation {
     created_at: string
 }
 
-export interface PaginatedDepartments {
+export interface PaginatedDesignations {
     data: Designation[]
     links: {
         first: string | null

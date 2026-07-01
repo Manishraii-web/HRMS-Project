@@ -25,6 +25,12 @@ const mainNavItems: NavItem[] = [
         icon: Users,
     },
     {
+        title: 'Designations',
+        href: route('designations.index'),
+        icon: Users,
+    },
+
+    {
         title: 'Attendances',
         href: '/attendances',
         icon:Clock,
