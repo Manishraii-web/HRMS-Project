@@ -8,7 +8,7 @@ use App\Repositories\Contracts\EmployeeDesignationRepositoryInterface;
 use App\Repositories\Contracts\EmployeeRepositoryInterface;
 use App\Repositories\DepartmentRepository;
 use App\Repositories\DesignationRepository;
-use app\Repositories\EmployeeDesignationRepository;
+use App\Repositories\EmployeeDesignationRepository;
 use App\Repositories\EmployeeRepository;
 use Illuminate\Support\ServiceProvider;
 

@@ -4,6 +4,7 @@ export interface Designation {
     level: number | null
     description: string | null
     status: 'active' | 'inactive'
+    employees_count : number
     created_at: string
 }
 

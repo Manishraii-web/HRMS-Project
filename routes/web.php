@@ -3,6 +3,7 @@
 use App\Http\Controllers\Department\DepartmentController;
 use App\Http\Controllers\Designation\DesignationController;
 use App\Http\Controllers\Employee\EmployeeController;
+use App\Http\Controllers\EmployeeDesignation\EmployeeDesignationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -29,11 +30,13 @@ Route::post('/sanctum/login', function (Request $request) {
 Route::middleware(['auth', 'verified'])->group(function(){
     Route::resource('departments', DepartmentController::class);
     Route::resource('employees',EmployeeController::class);
+    Route::post('employees/{employee}/designations', [EmployeeDesignationController::class, 'store'])
+    ->name('employees.designations.store');
     Route::resource('designations', DesignationController::class);
 });
 
 Route::get('/whoami', function () {
-    return response()->json(['user' => auth()->user()]);
+    return response()->json(['user' => Auth::user()]);
 })->middleware('auth');
 
 

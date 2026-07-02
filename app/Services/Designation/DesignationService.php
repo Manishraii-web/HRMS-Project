@@ -50,6 +50,10 @@ class DesignationService
         return $this->delete_designation->execute($model);
     }
 
+    public function options(int $tenantId) {
+      return $this->designation_repository->options($tenantId);
+    }
+
 
 
 }

@@ -21,7 +21,7 @@ class DesignationResource extends JsonResource
            'level' => $this->level,
            'description' => $this->description,
            'status' => $this->status,
-           'employees_count' => $this->employees_count ?? 0,
+           'employees_count' => $this->employees_count ,
            'created_at' => $this->created_at,
         ];
     }

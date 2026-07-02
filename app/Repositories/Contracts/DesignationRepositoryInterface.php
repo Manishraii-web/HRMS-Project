@@ -2,11 +2,11 @@
 
 namespace App\Repositories\Contracts;
 
-use App\Models\EmployeeDesignation;
+use Illuminate\Support\Collection;
 
-interface DesignationRepositoryInterface
+interface DesignationRepositoryInterface extends BaseRepositoryInterface
 {
-    public function findCurrentForEmployee(int $employeeId): ? EmployeeDesignation;
-    public function close(EmployeeDesignation $row, \DateTimeInterface $closedAt): EmployeeDesignation;
-    public function create(array $data): EmployeeDesignation;
+    public function options(int $tnenantId): Collection;
 }
+
+

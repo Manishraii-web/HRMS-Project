@@ -10,6 +10,7 @@ use App\Http\Resources\Employee\EmployeeResource;
 use App\Models\Employee;
 use App\Services\Employee\EmployeeService;
 use App\Services\Department\DepartmentService;
+use App\Services\Designation\DesignationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -19,6 +20,7 @@ class EmployeeController extends Controller
     public function __construct(
         protected EmployeeService $employeeService,
         protected DepartmentService $departmentService,
+        protected DesignationService $designationService
     ) {}
 
     public function index(Request $request)
@@ -67,8 +69,17 @@ class EmployeeController extends Controller
         $employee = $this->employeeService->find($id);
         $this->authorize('view', $employee);
 
+        $currentDesignation = $employee->currentDesignation()->with('pivot')->first();
+
         return Inertia::render('Employees/Show', [
             'employee' => new EmployeeResource($employee),
+            'currentDesignation' => $currentDesignation ? [
+            'id'         => $currentDesignation->id,
+            'name'       => $currentDesignation->name,
+            'level'      => $currentDesignation->level,
+            'from_date'  => $currentDesignation->pivot->from_date,
+        ] : null,
+
         ]);
     }
 
