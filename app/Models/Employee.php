@@ -65,7 +65,7 @@ class Employee extends Model
     }
 
     public function currentDesignation(): BelongsToMany {
-        return $this->desinations()->wherePivot('to_date', null);
+        return $this->designations()->wherePivot('to_date', null);
     }
 
 

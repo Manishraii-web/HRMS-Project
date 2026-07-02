@@ -69,10 +69,11 @@ class EmployeeController extends Controller
         $employee = $this->employeeService->find($id);
         $this->authorize('view', $employee);
 
-        $currentDesignation = $employee->currentDesignation()->with('pivot')->first();
+        $currentDesignation = $employee->currentDesignation()->first();
 
         return Inertia::render('Employees/Show', [
             'employee' => new EmployeeResource($employee),
+            'designations' => $this->designationService->options($employee->tenant_id),
             'currentDesignation' => $currentDesignation ? [
             'id'         => $currentDesignation->id,
             'name'       => $currentDesignation->name,
@@ -91,6 +92,7 @@ class EmployeeController extends Controller
         return Inertia::render('Employees/Edit', [
             'employee'    => new EmployeeResource($employee),
             'departments' => $this->departmentService->options(Auth::user()->tenant_id),
+
         ]);
     }
 

@@ -13,7 +13,7 @@ class UpdateEmployeeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('update', $this->route('employee'));
+        return $this->user()->can('employees.update');
     }
     /**
      * Get the validation rules that apply to the request.
@@ -54,7 +54,7 @@ class UpdateEmployeeRequest extends FormRequest
             'job_title' => 'required|string|max:100',
             'employment_type' => 'required|string|in:full_time,part_time,intern,contract',
             'hire_date' => 'required|date',
-            'termination_date' => 'required|date|after_or_equal:hire_date',
+            'termination_date' => 'nullable|date|after_or_equal:hire_date',
             'status' => 'required|string|in:active,inactive,terminated',
             'basic_salary' => 'nullable|numeric|min:0',
             'bank_name' => 'nullable|string|max:100',

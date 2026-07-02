@@ -7,7 +7,7 @@ use App\Repositories\Contracts\DesignationRepositoryInterface;
 use App\Repositories\Contracts\EmployeeDesignationRepositoryInterface;
 use App\Repositories\Contracts\EmployeeRepositoryInterface;
 use Illuminate\Support\Facades\DB;
-use Nette\Schema\ValidationException;
+use Illuminate\Validation\ValidationException;
 
 class AssignDesignationAction
 {

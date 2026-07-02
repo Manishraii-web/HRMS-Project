@@ -1,18 +1,45 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue'
-import { Head } from '@inertiajs/vue3'
+import { Head, useForm, usePage } from '@inertiajs/vue3'
 import type { BreadcrumbItem } from '@/types'
 import type { Employee } from '@/types/employee'
 
+interface DesignationOption {
+    id: number
+    name: string
+    level: number | null
+}
+
+interface CurrentDesignation {
+    id: number
+    name: string
+    level: number | null
+    from_date: string | null
+}
+
 const props = defineProps<{
     employee: Employee
+    designations: DesignationOption[]
+    currentDesignation: CurrentDesignation | null
 }>()
+
+const page = usePage()
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Employees', href: '/employees' },
     { title: props.employee.full_name || props.employee.email, href: '#' },
 ]
+
+const assignForm = useForm({
+    designation_id: props.currentDesignation?.id ?? null,
+})
+
+function assignDesignation() {
+    assignForm.post(route('employees.designations.store', props.employee.id), {
+        preserveScroll: true,
+    })
+}
 </script>
 
 <template>
@@ -99,7 +126,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                     </div>
                     <div class="px-6 py-4 flex justify-between items-center">
                         <span class="text-sm text-muted-foreground">Hire Date</span>
-                        <span class="text-sm">{{ employee.hire_date.slice(0, 10) }}</span>
+                        <span class="text-sm">{{ employee.hire_date?.slice(0, 10) }}</span>
                     </div>
                     <div class="px-6 py-4 flex justify-between items-center">
                         <span class="text-sm text-muted-foreground">Termination Date</span>
@@ -132,6 +159,72 @@ const breadcrumbs: BreadcrumbItem[] = [
                         <span class="text-sm text-muted-foreground">PAN Number</span>
                         <span class="text-sm font-mono">{{ employee.pan_number ?? '—' }}</span>
                     </div>
+                </div>
+
+                <!-- Designation -->
+                <div class="rounded-xl border border-sidebar-border divide-y">
+                    <div class="px-6 py-3">
+                        <h2 class="text-sm font-semibold text-muted-foreground uppercase">Designation</h2>
+                    </div>
+
+                    <!-- Current designation display -->
+                    <div class="px-6 py-4 flex justify-between items-center">
+                        <span class="text-sm text-muted-foreground">Current Title</span>
+                        <span class="text-sm font-medium">
+                            {{ currentDesignation?.name ?? '—' }}
+                            <span v-if="currentDesignation?.level" class="text-muted-foreground font-normal">
+                                (Level {{ currentDesignation.level }})
+                            </span>
+                        </span>
+                    </div>
+                    <div v-if="currentDesignation?.from_date" class="px-6 py-4 flex justify-between items-center">
+                        <span class="text-sm text-muted-foreground">Since</span>
+                        <span class="text-sm">{{ currentDesignation.from_date.slice(0, 10) }}</span>
+                    </div>
+
+                    <!-- Assign form -->
+                    <div class="px-6 py-4 space-y-3">
+                        <p class="text-sm text-muted-foreground font-medium">
+                            {{ currentDesignation ? 'Change Designation' : 'Assign Designation' }}
+                        </p>
+                        <div class="flex gap-3 items-start">
+                            <div class="flex-1">
+                                <select
+                                    v-model="assignForm.designation_id"
+                                    class="w-full border border-sidebar-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                                    :class="{ 'border-destructive': assignForm.errors.designation_id }"
+                                >
+                                    <option :value="null" disabled>Select a designation...</option>
+                                    <option
+                                        v-for="d in designations"
+                                        :key="d.id"
+                                        :value="d.id"
+                                    >
+                                        {{ d.name }}{{ d.level ? ` (Level ${d.level})` : '' }}
+                                    </option>
+                                </select>
+                                <p v-if="assignForm.errors.designation_id" class="text-destructive text-xs mt-1">
+                                    {{ assignForm.errors.designation_id }}
+                                </p>
+                            </div>
+                            <button
+                                type="button"
+                                @click="assignDesignation"
+                                :disabled="assignForm.processing || assignForm.designation_id === null"
+                                class="px-4 py-2 bg-primary text-primary-foreground text-sm rounded-lg hover:opacity-90 disabled:opacity-50"
+                            >
+                                {{ assignForm.processing ? 'Saving...' : 'Assign' }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flash -->
+                <div
+                    v-if="page.props.flash?.success"
+                    class="fixed bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow text-sm"
+                >
+                    {{ page.props.flash.success }}
                 </div>
 
             </div>
